@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomofocus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Pomofocus</h1>
+        <nav>
+            <button id="reportBtn">Report</button>
+            <button id="settingBtn">Setting</button>
+            <button id="signInBtn">Sign In</button>
+            <button id="moreBtn">⋮</button>
+        </nav>
+    </header>
+    <main>
+        <div id="timerContainer">
+            <div id="timerTabs">
+                <button class="timerTab active" data-time="1500">Pomodoro</button>
+                <button class="timerTab" data-time="300">Short Break</button>
+                <button class="timerTab" data-time="900">Long Break</button>
+            </div>
+            <div id="timer">25:00</div>
+            <button id="startBtn">START</button>
+        </div>
+        <p id="focusMessage">#1<br>Time to focus!</p>
+        <div id="tasksContainer">
+            <h2>Tasks</h2>
+            <button id="taskOptionsBtn">⋮</button>
+            <div id="taskList"></div>
+            <button id="addTaskBtn">+ Add Task</button>
+        </div>
+    </main>
+    <div id="settingsOverlay" class="overlay">
+        <div id="settingsPanel">
+            <div class="settings-header">
+                <h2>SETTING</h2>
+                <button id="closeSettings">&times;</button>
+            </div>
+            <div class="settings-content">
+                <section>
+                    <h3>TIMER</h3>
+                    <div class="setting-row">
+                        <label>Time (minutes)</label>
+                        <div class="time-inputs">
+                            <input type="number" id="pomodoroTime" value="25" min="1" max="60">
+                            <input type="number" id="shortBreakTime" value="5" min="1" max="60">
+                            <input type="number" id="longBreakTime" value="15" min="1" max="60">
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <label>Auto Start Breaks</label>
+                        <input type="checkbox" id="autoStartBreaks">
+                    </div>
+                    <div class="setting-row">
+                        <label>Auto Start Pomodoros</label>
+                        <input type="checkbox" id="autoStartPomodoros">
+                    </div>
+                    <div class="setting-row">
+                        <label>Long Break Interval</label>
+                        <input type="number" id="longBreakInterval" value="4" min="1" max="10">
+                    </div>
+                </section>
+                <section>
+                    <h3>TASK</h3>
+                    <div class="setting-row">
+                        <label>Auto Check Tasks</label>
+                        <input type="checkbox" id="autoCheckTasks">
+                    </div>
+                    <div class="setting-row">
+                        <label>Auto Switch Tasks</label>
+                        <input type="checkbox" id="autoSwitchTasks">
+                    </div>
+                </section>
+                <section>
+                    <h3>SOUND</h3>
+                    <div class="setting-row">
+                        <label>Alarm Sound</label>
+                        <select id="alarmSound">
+                            <option value="kitchen">Kitchen</option>
+                            <option value="bell">Bell</option>
+                            <option value="bird">Bird</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <label>Alarm Volume</label>
+                        <input type="range" id="alarmVolume" min="0" max="100" value="50">
+                    </div>
+                    <div class="setting-row">
+                        <label>Repeat</label>
+                        <input type="number" id="alarmRepeat" value="1" min="1" max="5">
+                    </div>
+                    <div class="setting-row">
+                        <label>Ticking Sound</label>
+                        <select id="tickingSound">
+                            <option value="none">None</option>
+                            <option value="tick">Tick</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <label>Ticking Volume</label>
+                        <input type="range" id="tickingVolume" min="0" max="100" value="50">
+                    </div>
+                </section>
+                <section>
+                    <h3>THEME</h3>
+                    <div class="setting-row">
+                        <label>Color Themes</label>
+                        <div id="colorThemes">
+                            <button class="color-theme" style="background-color: #d95550;"></button>
+                            <button class="color-theme" style="background-color: #4c9195;"></button>
+                            <button class="color-theme" style="background-color: #457ca3;"></button>
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <label>Hour Format</label>
+                        <select id="hourFormat">
+                            <option value="24">24-hour</option>
+                            <option value="12">12-hour</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <label>Dark Mode when running</label>
+                        <input type="checkbox" id="darkMode">
+                    </div>
+                    <div class="setting-row">
+                        <label>Small Window</label>
+                        <input type="checkbox" id="smallWindow">
+                    </div>
+                </section>
+                <section>
+                    <h3>NOTIFICATION</h3>
+                    <div class="setting-row">
+                        <label>Reminder</label>
+                        <select id="reminder">
+                            <option value="last">Last</option>
+                            <option value="every">Every</option>
+                        </select>
+                        <input type="number" id="reminderInterval" value="5" min="1" max="60">
+                        <span>min</span>
+                    </div>
+                </section>
+                <section>
+                    <h3>INTEGRATION</h3>
+                    <div class="setting-row">
+                        <label>Todoist</label>
+                        <button id="todoistConnect">Connect</button>
+                    </div>
+                    <div class="setting-row">
+                        <label>Webhook</label>
+                        <button id="addWebhook">+ Add</button>
+                    </div>
+                </section>
+            </div>
+            <div class="settings-footer">
+                <button id="saveSettings">OK</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
