@@ -1,4 +1,7 @@
 {
   "root": "templates",
-  "static": ["static"]
+  "static": ["static"],
+  "builds": {
+    "static": true
+  }
 }
