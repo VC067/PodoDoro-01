@@ -1,4 +1,5 @@
 {
   "root": "templates",
-  "static-server": "static"
+  "static": ["static"],
+  "build": "flask run"
 }
